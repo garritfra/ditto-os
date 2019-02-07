@@ -9,14 +9,20 @@ start:
 	mov ax, 07C0h		; Set data segment to where we're loaded
 	mov ds, ax
 
-
 	mov si, text_string	; Put string position into SI
 	call print_string	; Call our string-printing routine
+    
+    mov ah, 1h          ; Read Char (Saved in al)
+    int 21h             ; Execute
+    mov dl, al          ; copy char to dl
+
+    mov ah, 2h          ; Write char
+    int 21h             ; Execute
 
 	jmp $			; Jump here - infinite loop!
 
 
-	text_string db 'This is my cool new OS!', 0
+	text_string db 'Loading kernel', 0
 
 
 print_string:			; Routine: output string in SI to screen
