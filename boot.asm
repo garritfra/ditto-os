@@ -1,32 +1,44 @@
 	BITS 16
 
-main
+
 
 start:
-	mov ax, 07C0h		; Set up 4K stack space after this bootloader
+	mov ax, 07C0h	; Set up 4K stack space after this bootloader
 	add ax, 288		; (4096 + 512) / 16 bytes per paragraph
 	mov ss, ax
 	mov sp, 4096
 
-	mov ax, 07C0h		; Set data segment to where we're loaded
-	add ax, 1000
-	mov ds, ax
+	mov ax, 07C0h	; Set data segment to where we're loaded
+	add ax, 255
+	mov ds, ax  
 
 main_loop:	
-	call read_char
-	jmp main_loop			; Jump here - infinite loop!
-
-
-	text_string db 'Loading kernel', 0
-
+    call read_char  ; Read character
+    jmp main_loop   ; Repeat
 
 read_char:
-	mov ah, 0h
-	int 16h
-	mov ah, 0eh
-	int 10h
+    mov ah, 0h      ; Call Function "Read Char"
+    int 16h         ; Execute Keyboard Services
+    
+    mov ah, 0eh     ; Call Function "Write char to TTY
+    int 10h         ; Execute Video Services
 
-print_string:			; Routine: output string in SI to screen
+    cmp AL, 0x0d    ; Insert new line, if keystroke was return
+    je new_line
+
+    ret
+
+new_line:
+    mov AH, 03h     ; Get Cursor position
+    int 10h
+
+    add DH, 1       ; Add 1 to cursor position
+
+    mov AH, 02h     ; Set Cursor to new position
+    int 10h
+    ret
+
+print_string:		; Routine: output string in SI to screen
 	mov ah, 0Eh		; int 10h 'print char' function
 
 .repeat:
@@ -42,3 +54,5 @@ print_string:			; Routine: output string in SI to screen
 
 	times 510-($-$$) db 0	; Pad remainder of boot sector with 0s
 	dw 0xAA55		; The standard PC boot signature
+
+
