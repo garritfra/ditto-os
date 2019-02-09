@@ -5,3 +5,6 @@ image:
 
 bin:
 	nasm -f bin -o boot.bin boot.asm
+
+run: prog
+	qemu-system-x86_64 dittoOS.img

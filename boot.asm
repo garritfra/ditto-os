@@ -1,5 +1,7 @@
 	BITS 16
 
+main
+
 start:
 	mov ax, 07C0h		; Set up 4K stack space after this bootloader
 	add ax, 288		; (4096 + 512) / 16 bytes per paragraph
@@ -7,23 +9,22 @@ start:
 	mov sp, 4096
 
 	mov ax, 07C0h		; Set data segment to where we're loaded
+	add ax, 1000
 	mov ds, ax
 
-	mov si, text_string	; Put string position into SI
-	call print_string	; Call our string-printing routine
-    
-    mov ah, 1h          ; Read Char (Saved in al)
-    int 21h             ; Execute
-    mov dl, al          ; copy char to dl
-
-    mov ah, 2h          ; Write char
-    int 21h             ; Execute
-
-	jmp $			; Jump here - infinite loop!
+main_loop:	
+	call read_char
+	jmp main_loop			; Jump here - infinite loop!
 
 
 	text_string db 'Loading kernel', 0
 
+
+read_char:
+	mov ah, 0h
+	int 16h
+	mov ah, 0eh
+	int 10h
 
 print_string:			; Routine: output string in SI to screen
 	mov ah, 0Eh		; int 10h 'print char' function
