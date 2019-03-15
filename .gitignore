@@ -1,2 +1,5 @@
 boot.bin
 dittoOS.img
+**/*.o
+**/*.elf
+**/*.iso
