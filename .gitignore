@@ -3,3 +3,4 @@ dittoOS.img
 **/*.o
 **/*.elf
 **/*.iso
+bochslog.txt
