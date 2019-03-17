@@ -18,7 +18,7 @@ void fb_move_cursor(unsigned short pos)
 int fb_write(char *buf, unsigned int len) {
 
     for(int i = 0; i <= (int)len; i++) {
-        fb_write_cell(get_cursor_position() * 2, buf[i], 0, 15);
+        fb_write_cell(get_cursor_position() * 2, buf[i], VGA_COLOR_BLACK, VGA_COLOR_WHITE);
         advance_cursor();
     }
     return 0;
