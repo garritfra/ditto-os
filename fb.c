@@ -1,5 +1,5 @@
 #include "kmain.h"
-#include "io.h"
+#include "fb.h"
 
 void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg) {
     char *fb = (char *) 0x000B8000;
