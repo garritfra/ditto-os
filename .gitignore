@@ -4,3 +4,4 @@ dittoOS.img
 **/*.elf
 **/*.iso
 bochslog.txt
+.vscode/
