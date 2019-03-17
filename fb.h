@@ -35,4 +35,8 @@ void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg);
      */
 void fb_move_cursor(unsigned short pos);
 
+unsigned short get_cursor_position(void);
+
+void advance_cursor(void);
+
 #endif /* INCLUDE_IO_H */

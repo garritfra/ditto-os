@@ -16,9 +16,24 @@ void fb_move_cursor(unsigned short pos)
 }
 
 int fb_write(char *buf, unsigned int len) {
+
     for(int i = 0; i <= (int)len; i++) {
-        fb_write_cell((int)(i * 2), buf[i], 0, 15);
-        fb_move_cursor(i);
+        fb_write_cell(get_cursor_position() * 2, buf[i], 0, 15);
+        advance_cursor();
     }
     return 0;
+}
+
+void advance_cursor(void) {
+    fb_move_cursor(get_cursor_position() + 1);
+}
+
+unsigned short get_cursor_position(void)
+{
+    unsigned short pos = 0;
+    outb(0x3D4, 0x0F);
+    pos |= inb(0x3D5);
+    outb(0x3D4, 0x0E);
+    pos |= ((unsigned short)inb(0x3D5)) << 8;
+    return pos;
 }
