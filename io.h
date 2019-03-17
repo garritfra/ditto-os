@@ -11,7 +11,7 @@
 
 int write(char *buf, unsigned int len);
 
-void outb(unsigned short port, unsigned char data);
+extern void outb(unsigned short port, unsigned char data);
 
 /** fb_write_cell:
     *  Writes a character with the given foreground and background to position i
