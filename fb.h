@@ -1,5 +1,5 @@
-#ifndef INCLUDE_IO_H
-#define INCLUDE_IO_H
+#ifndef INCLUDE_FRAMEBUFFER
+#define INCLUDE_FRAMEBUFFER
 
 /* The I/O ports */
 #define FB_COMMAND_PORT 0x3D4
@@ -11,7 +11,7 @@
 
 int write(char *buf, unsigned int len);
 
-extern void outb(unsigned short port, unsigned char data);
+
 
 /** fb_write_cell:
     *  Writes a character with the given foreground and background to position i
