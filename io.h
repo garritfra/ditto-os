@@ -15,6 +15,6 @@ extern void outb(unsigned short port, unsigned char data);
  *  @param  port The address of the I/O port
  *  @return      The read byte
  */
-unsigned char inb(unsigned short port);
+extern unsigned char inb(unsigned short port);
 
 #endif

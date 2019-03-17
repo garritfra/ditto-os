@@ -9,7 +9,9 @@
 #define FB_HIGH_BYTE_COMMAND 14
 #define FB_LOW_BYTE_COMMAND 15
 
-int write(char *buf, unsigned int len);
+#include "io.h"
+
+int fb_write(char *buf, unsigned int len);
 
 
 

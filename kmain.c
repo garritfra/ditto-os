@@ -3,6 +3,6 @@
 
 int main()
 {
-    write("Hello", 4);
+    fb_write("Hello", 4);
     return 0;
 }
