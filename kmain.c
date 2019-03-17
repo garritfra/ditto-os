@@ -3,9 +3,6 @@
 
 int main()
 {
-    fb_write_cell(0, 'A', 0, 15);
-    fb_write_cell(2, 'B', 0, 15);
-    fb_write_cell(4, 'C', 0, 15);
-    fb_move_cursor(6);
+    write("Hello", 4);
     return 0;
 }
