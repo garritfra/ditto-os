@@ -1,16 +1,19 @@
-[org 0x7c00]
-mov ah, 0x0e
+[org 0x7c00] ; tell the assembler that our offset is bootsector code
 
-mov al, [the_secret]
-int 0x10
+mov bx, HELLO
+call print
 
-the_secret:
-    ; ASCII code 0x58 ('X') is stored just before the zero-padding.
-    ; On this code that is at byte 0x2d (check it out using 'xxd file.bin')
-    db "X"
+call print_nl ; new line
 
-jmp $ ; jump to current address = infinite loop
+jmp $
+
+%include "print.asm"
+%include "print_hex.asm"
+
+; data
+HELLO:
+    db 'Hello, World', 0
 
 ; padding and magic number
-times 510 - ($-$$) db 0
+times 510-($-$$) db 0
 dw 0xaa55
