@@ -1,8 +1,9 @@
 #include "kmain.h"
-#include "fb.h"
+#include "std.h"
+
 
 int main()
 {
-    fb_write("Hello", 4);
+    printf("Hello");
     return 0;
 }

@@ -1,4 +1,3 @@
-#include "kmain.h"
 #include "fb.h"
 
 void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg) {
@@ -15,6 +14,9 @@ void fb_move_cursor(unsigned short pos)
     outb(FB_DATA_PORT, pos & 0x00FF);
 }
 
+/*
+* Write frame buffer to screen 
+*/
 int fb_write(char *buf, unsigned int len) {
 
     for(int i = 0; i <= (int)len; i++) {
@@ -22,6 +24,15 @@ int fb_write(char *buf, unsigned int len) {
         advance_cursor();
     }
     return 0;
+}
+
+/** read_scan_code:
+     *  Reads a scan code from the keyboard
+     *
+     *  @return The scan code (NOT an ASCII character!)
+     */
+unsigned char read_scan_code(void) {
+    return inb(KBD_DATA_PORT);
 }
 
 void advance_cursor(void) {

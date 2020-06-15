@@ -28,6 +28,8 @@
 #define VGA_COLOR_LIGHT_BROWN 14
 #define VGA_COLOR_WHITE 15
 
+#define KBD_DATA_PORT   0x60
+
 
 int fb_write(char *buf, unsigned int len);
 
